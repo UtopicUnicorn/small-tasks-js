@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Вторая часть задания</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>
+
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/sunny/jquery-ui.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div class="logo_container">
+                <!--test generated logo-->
+                <img class="logo" src="assets/cinema_new_logo.png" alt=""/>
+            </div>
+            <div class="nav">
+                <span>Афиша</span>
+                <span>Новости</span>
+                <span>Программа лояльности</span>
+                <span>О нас</span>
+            </div>
+            <div class="profile" onclick="showTickets()">
+                <p>Профиль</p>
+            </div>
+        </header>
+        <div class="container">
+            <h1>Сейчас в прокате</h1>
+            <div class="wrapper" id="films_container"></div>
+            <!-- modal window -->
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>Забронировать место и дату сеанса</h3>
+                    <!-- date selector -->
+                    <div class="container">
+                        <div class="ui-widget">
+                            <label for="datep">Дата:
+                            </label>
+                            <input id="datep"/>
+                        </div>
+
+                        <!-- tiles with time -->
+                        <div class="wrapper">
+                            <div class="date-selector"  onclick="setDate(10)" data="10"><p>10:00</p></div>
+                            <div class="date-selector"  onclick="setDate(12)" data="12"><p>12:00</p></div>
+                            <div class="date-selector"  onclick="setDate(14)" data="14"><p>14:00</p></div>
+                            <div class="date-selector"  onclick="setDate(16)" data="16"><p>16:00</p></div>
+                            <div class="date-selector"  onclick="setDate(18)" data="18"><p>18:00</p></div>
+                            <div class="date-selector"  onclick="setDate(20)" data="20"><p>20:00</p></div>
+                        </div>
+
+                        <!--seats block-->
+                        <div id="seats_container" class="seats">
+                            <div class="screen">
+                                <p>Экран</p>
+                                <img src="assets/screen1.png">
+                            </div>
+                                <!-- seats-->
+                                <div>
+                                    <span>Места</span>
+                                    <div id="seats" class="wrapper">
+                                    </div>
+                                </div>
+                        </div>
+                        <button class="btn" onclick="writeLocal()">Забронировать</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>
