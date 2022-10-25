@@ -143,21 +143,6 @@ h1{
     margin: 2px;
 }
 
-/*style if we are late for film*/
-.date_late{
-    background-color: rgba(0,0,0,0.9);
-    cursor: not-allowed;
-    text-align: center;
-}
-
-/*style if we are have a time for session*/
-.date_ok{
-     background-color: aquamarine;
-     color: black ;
-     text-align: center;
-    cursor: pointer;
-}
-
 /*wrapper for seat select*/
 .seats .wrapper{
     display: grid;
@@ -185,6 +170,13 @@ h1{
 
 .cell_taken:hover{
     cursor: not-allowed;
+}
+
+.cell_late{
+    text-align: center;
+    vertical-align: center;
+    border: 1px solid black;
+    background-color: darkgrey;
 }
 
 .cell:hover{
@@ -221,7 +213,14 @@ h1{
     transition: 500ms;
 }
 
-.date-selector.date_ok:hover{
+.date-selector{
+    background-color: aquamarine;
+    color: black ;
+    text-align: center;
+    cursor: pointer;
+}
+
+.date-selector :hover{
     cursor: pointer;
     background-color: #804EA7;
     transition: 500ms;
