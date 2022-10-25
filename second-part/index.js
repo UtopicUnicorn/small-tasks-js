@@ -30,7 +30,7 @@ let selectedTime;
 
 let selectedFilm;
 
-let fistSelectedSeat;
+let firstSelectedSeat;
 
 const modal = document.getElementById("modal");
 
@@ -58,8 +58,6 @@ function openWindow(film) {
   modal.style.display = "block";
   $( "#datep" ).datepicker("setDate", new Date());
   selectedDate = $( "#datep" ).val();
-  //set time choose style for today
-  changeStyle(new Date());
 }
 
 // close modal window on 'X' click
@@ -104,30 +102,16 @@ $(function() {
   });
     $('#datep').datepicker({
         constrainInput: true,
-        minDate: "0",
+        minDate: "-7",
         maxDate: "+7",
     });
 });
 
 $('#datep').change(function (){
-  changeStyle($('#datep').val());
+  // changeStyle($('#datep').val());
   clearData();
   selectedDate = document.getElementById('datep').value;
 })
-
-
-// change style for session select
-function changeStyle(date){
-  date = new Date(date);
-  let currentDay = new Date();
-  if(compDate(date, currentDay)) {
-    date = currentDay;
-  }
-
-  $(".date-selector").filter((i,item)=>date.getHours() < $(item).attr("data")).addClass("date_ok").removeClass("date_late");
-  $(".date-selector").filter((i,item)=>date.getHours() >= $(item).attr("data")).addClass("date_late").removeClass("date_ok");
-}
-
 
 function setDate(hour){
   //check compare
@@ -143,13 +127,6 @@ function setDate(hour){
   else {
     alert('Please, select date at first!');
   }
-}
-
-function compDate(checkD, current){
-  if(checkD.getDay() === current.getDay()){
-    return true;
-  }
-  return false
 }
 
 function displaySeats(){
@@ -178,10 +155,25 @@ function displaySeats(){
     }
   }
 
+  //disable click and change style if we are late
+  if(new Date(selectedDate) < new Date()) {
+    for (let i = 0; i < n; i++) {
+      for (let j = 0; j< m; j++) {
+        if( document.getElementById(`${i}+${j}`).className!=='cell_taken')
+        document.getElementById(`${i}+${j}`).className ='cell_late';
+        document.getElementById(`${i}+${j}`).removeAttribute('onclick');
+
+      }
+    }
+  }
 }
 
 //write data into localStorage
 function writeLocal(){
+  if(new Date(selectedDate)<new Date()){
+    alert('You have selected wrong date');
+    return;
+  }
   if((selectedFilm===undefined) || (selectedTime===undefined) || (selectedDate === undefined || selectedSeat ===undefined)){
     alert('You have not chosen seat');
     return;
@@ -196,11 +188,11 @@ function setPlace(row, seat) {
 
   const choosedId = `${row}+${seat}`
   selectedSeat = `${row+1} ${seat+1}`
-  if(fistSelectedSeat!=undefined){
-    document.getElementById(fistSelectedSeat).removeAttribute('style');
+  if(firstSelectedSeat!=undefined){
+    document.getElementById(firstSelectedSeat).removeAttribute('style');
   }
   document.getElementById(`${row}+${seat}`).setAttribute('style', 'background-color: green');
-  fistSelectedSeat = choosedId;
+  firstSelectedSeat = choosedId;
   fillSeatsObj();
 }
 
